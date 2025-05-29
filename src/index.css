@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@font-face {
+    font-family: Inter;
+    src: url(../src/assets/fonts/Inter-VariableFont_opsz\,wght.ttf);
+}
+
+
+
+* {
+    font-family: var(--font-Inter);
+}
+
+body {
+    color: #030712;
+    background-color: #fff;
+}
+
+.container {
+    padding: 0 12px;
+}
+
+@media (min-width: 640px) {
+    .container {
+        padding: 0 16px;
+    }
+}
+
+.header_link.active {
+    border-color: #0037ff;
+}
