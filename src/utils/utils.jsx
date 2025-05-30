@@ -1,6 +1,6 @@
 // components/SuspenseCustom.jsx
 import { Suspense } from "react";
-import "../styles/utils.css";
+import "./utils.css";
 
 const LoadingSuspense = () => {
   return (
