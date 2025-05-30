@@ -5,7 +5,7 @@ const LoadingUserCards = () => {
   const loadingUsers = Array(10).fill("");
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 animate-pulse">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
       {loadingUsers.map((_, index) => (
         <div
           key={index}
@@ -40,3 +40,4 @@ const LoadingUserCards = () => {
 };
 
 export default React.memo(LoadingUserCards);
+

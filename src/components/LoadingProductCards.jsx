@@ -8,7 +8,7 @@ const LoadingProducts = () => {
       {loadingProducts.map((_, index) => (
         <div
           key={index}
-          className="bg-gray-50 border border-gray-300 rounded-xl overflow-hidden animate-pulse"
+          className="bg-gray-50 border border-gray-300 rounded-xl overflow-hidden"
         >
           {/* Image skeleton */}
           <div className="h-[160px] sm:h-[220px] md:h-[289px] bg-gray-200 rounded-t-xl"></div>
@@ -33,3 +33,4 @@ const LoadingProducts = () => {
 };
 
 export default React.memo(LoadingProducts);
+
