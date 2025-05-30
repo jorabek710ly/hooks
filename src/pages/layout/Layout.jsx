@@ -5,7 +5,7 @@ import Footer from "../../components/Footer";
 // Outlet, serves as a variable, as it changes content or page (component) according to route
 import { Outlet } from 'react-router-dom';
 import { SuspenseCustom } from '../../utils/utils';
-import Header from '../../components/header';
+import Header from '../../components/Header';
 
 const Layout = () => {
     return (
