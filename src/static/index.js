@@ -13,6 +13,11 @@ export const headerRouteLinks = [
         id: 3,
         title: "Users",
         route: "/users"
+    },
+        {
+        id: 4,
+        title: "Liked",
+        route: "/liked"
     }
 ];
 
