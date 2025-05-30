@@ -1,11 +1,16 @@
 // components/SuspenseCustom.jsx
 import { Suspense } from "react";
-import "../styles/loader.css"; // Stilini import qilamiz
+import "../styles/loader.css";
 
 const LoadingSuspense = () => {
   return (
-    <div className="w-full h-screen flex items-center justify-center bg-white z-50">
-      <div className="loader"></div>
+    <div className="w-full h-screen bg-white flex items-center justify-center z-50">
+      <div className="loader">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
     </div>
   );
 };
