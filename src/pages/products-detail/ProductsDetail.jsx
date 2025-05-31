@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { IoMdHeartEmpty } from "react-icons/io";
 import useFetch from '../../hooks/useFetch';
+import { useStateValue } from '../../context';
 
 const ProductsDetail = () => {
   useEffect(() => {
@@ -16,13 +18,18 @@ const ProductsDetail = () => {
     console.error(error);
   }
 
+  const [, dispatch] = useStateValue();
+  const handleLikedItem = (product) => {
+    dispatch({ type: "ADD_TO_LIKED_ITEMS", payload: product });
+  };
+
   return (
     <section className="py-10 bg-white">
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-10 items-start">
-          
+
           {/* Product Image */}
-          <div className="w-full aspect-[4/3] rounded-lg border border-gray-200 overflow-hidden flex items-center justify-center bg-gray-50">
+          <div className="relative w-full aspect-[4/3] rounded-lg border border-gray-200 overflow-hidden flex items-center justify-center bg-gray-50">
             {data?.image && (
               <img
                 src={data.image}
@@ -30,6 +37,13 @@ const ProductsDetail = () => {
                 className="w-auto h-auto max-w-full max-h-full object-contain"
               />
             )}
+            {/* Like Icon - positioned inside top-right */}
+            <button
+              onClick={() => handleLikedItem(data)}
+              className="absolute top-3 right-3 w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center hover:bg-gray-100 transition"
+            >
+              <IoMdHeartEmpty className="text-xl text-blue-600" />
+            </button>
           </div>
 
           {/* Product Info */}
@@ -55,6 +69,7 @@ const ProductsDetail = () => {
               Add to Cart
             </button>
           </div>
+
         </div>
       </div>
     </section>
