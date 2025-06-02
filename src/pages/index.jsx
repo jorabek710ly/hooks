@@ -14,8 +14,7 @@ const UsersDetail = lazy(() => import("./users-detail/UsersDetail"));
 const NotFound = lazy(() => import("./not-found/NotFound"));
 // Liked Page
 const Liked = lazy(() => import("./liked/Liked"));
-// Cart Page
-// const Cart = lazy(() => import("./cart/Cart"));
+
 
 const MainRouters = () => {
     return (

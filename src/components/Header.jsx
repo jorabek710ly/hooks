@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { headerRouteLinks } from "../static";
 import { NavLink } from 'react-router-dom';
-import { useStateValue } from '../context';
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [state] = useStateValue();
+  // Cart bilan bog'liq state olib tashlandi
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,13 +36,7 @@ const Header = () => {
                     to={`${item.route}`}
                   >
                     <span>{item.title}</span>
-     
-                    {
-                      item.id === 5 &&
-                      <div className='size-5 rounded-sm border border-[#046082] bg-highlight-blue flex items-center justify-center'>
-                        <span className='text-xs md:text-sm'>{state.cart.length}</span>
-                      </div>
-                    }
+                    {/* Cart count ko'rsatiladigan div olib tashlandi */}
                   </NavLink>
                 </li>
               ))

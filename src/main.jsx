@@ -6,20 +6,18 @@ import { BrowserRouter } from 'react-router-dom'
 const App = lazy(() => import("./App.jsx"));
 // Suspense Loading
 import { SuspenseCustom } from './utils/utils.jsx';
-// Context Provider
-import { ContextProvider } from './context/index.jsx';
-// Reducer, Initial State
-import { reducer, initialState } from "./context/raducer.jsx"
+// Redux Provider
+import { Provider } from 'react-redux';
+import { store } from "./redux/store.js"
 
 createRoot(document.getElementById('root')).render(
   // <StrictMode>
   <BrowserRouter>
     <SuspenseCustom>
-      <ContextProvider reducer={reducer} initialState={initialState}>
+      <Provider store={store}>
         <App />
-      </ContextProvider>
+      </Provider>
     </SuspenseCustom>
   </BrowserRouter>
-
   // </StrictMode>,
 )

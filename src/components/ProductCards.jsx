@@ -1,31 +1,38 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-
+// Loading Product Cards
 import LoadingProductCards from "./LoadingProductCards";
-import { useStateValue } from "../context/index";
-
+// Icons
 import { IoAdd } from "react-icons/io5";
-import { IoMdHeartEmpty } from "react-icons/io";
+import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
+
+// Redux hooks and actions
+import { useDispatch, useSelector } from 'react-redux';
+import { addToLikedItems } from '../redux/features/liked.slice';
+
 
 const ProductCards = ({ data, loading }) => {
   const navigate = useNavigate();
-  const [state, dispatch] = useStateValue();
+  const dispatch = useDispatch();
+  const likedItems = useSelector(state => state.likedSlice.likedItemsList);
+  const [isClicked, setIsClicked] = useState(null);
 
   const handleLikedItem = (product) => {
-    dispatch({ type: "ADD_TO_LIKED_ITEMS", payload: product });
-  };
+    dispatch(addToLikedItems(product));
+  }
 
   const handleAddToCart = (product) => {
-    dispatch({ type: "ADD_TO_CART", payload: product });
-  };
+    dispatch(addToCart(product));
+    setIsClicked(product.id);
+    setTimeout(() => setIsClicked(null), 450);
+  }
 
   return (
     <section className="bg-white py-10 min-h-screen">
       <div className="container mx-auto px-4">
         {loading && <LoadingProductCards />}
-
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-          {data?.map((product) => (
+          {data?.map(product => (
             <div
               key={product.id}
               className="bg-gray-50 border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 flex flex-col"
@@ -35,20 +42,22 @@ const ProductCards = ({ data, loading }) => {
                 onClick={() => navigate(`/products/${product.id}`)}
               >
                 <img
-                  src={product.image}
+                  src={product.images?.[0] || product.image || "/placeholder.png"}
                   alt={product.title}
                   loading="lazy"
                   className="h-full object-contain transition-transform duration-300 hover:scale-105"
                 />
-                {/* Like button inside image */}
                 <button
-                  onClick={(e) => {
+                  onClick={e => {
                     e.stopPropagation();
                     handleLikedItem(product);
                   }}
                   className="absolute top-2 right-2 w-8 h-8 flex items-center justify-center rounded-full border border-gray-300 bg-white text-blue-600 hover:bg-blue-100 transition"
                 >
-                  <IoMdHeartEmpty className="w-5 h-5" />
+                  {(likedItems.some(item => item.id === product.id)) ? 
+                    <IoMdHeart className="w-5 h-5" /> : 
+                    <IoMdHeartEmpty className="w-5 h-5" />
+                  }
                 </button>
               </div>
 
@@ -65,7 +74,7 @@ const ProductCards = ({ data, loading }) => {
 
                   <button
                     onClick={() => handleAddToCart(product)}
-                    className="w-8 h-8 flex items-center justify-center rounded-md bg-blue-100 text-blue-600 hover:bg-blue-200 transition"
+                    className={`w-8 h-8 flex items-center justify-center rounded-md bg-blue-100 text-blue-600 hover:bg-blue-200 transition ${isClicked === product.id ? "animate-pulse" : ""}`}
                   >
                     <IoAdd className="w-5 h-5" />
                   </button>
@@ -76,7 +85,7 @@ const ProductCards = ({ data, loading }) => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
 export default React.memo(ProductCards);
